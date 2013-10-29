@@ -1,0 +1,178 @@
+
+<html>
+<head>
+	<title>GMap Examples</title>
+	<!--
+	<script type="text/javascript" src="lib/javascript.util.js"></script>
+	<script type="text/javascript" src="lib/jsts.js"></script>-->
+	<script type="text/javascript" src="lib/d3.js"></script>
+	<!--<script type="text/javascript" src="lib/attache.array.min.js"></script>-->
+	<script type="text/javascript" src="../gmap.js"></script>
+
+</head>
+<body>
+	<div id="container" style="width:500px;height=500px;"></div>
+
+	<script type="text/javascript">
+		var nodes = [];
+		for  (var i = 0; i < 30; i++) {
+			nodes.push({x: 200*Math.random(), y: 200*Math.random(), cluster:0});
+		}
+		for  (var i = 0; i < 30; i++) {
+			nodes.push({x: 200*Math.random() + 200, y: 200*Math.random(), cluster:1});
+		}
+		for  (var i = 0; i < 30; i++) {
+			nodes.push({x: 200*Math.random(), y: 200*Math.random() + 200, cluster:2});
+		}
+		for  (var i = 0; i < 30; i++) {
+			nodes.push({x: 200*Math.random() + 200, y: 200*Math.random() + 200, cluster:3});
+		}
+		var config = {
+			width: 500,
+			height: 500,
+			htmlElement: "container",
+			nodes: nodes,
+			clusterCount: 4,
+			minDistance: 50,
+			tolerance: 5
+		};
+
+		var GMap = new GMap(config);
+	</script>
+	<script type="text/javascript">
+// 	init();
+// 		function init(){
+
+// 			voronoi = d3.geom.voronoi()
+//     			.clipExtent([[0, 0], [500, 500]]);
+
+// 			var geomFact = new jsts.geom.GeometryFactory();
+
+// 			var points = new Array(20);
+// 			for (var i=0; i<points.length; i++) {
+
+// 				// points[i] = new jsts.geom.Coordinate((300* Math.random()()) , (300 * Math.random()()));
+// 				points[i] = new jsts.geom.Coordinate(i * 10, i * 10);
+// 				console.log(points[i]);
+// 			}
+
+// 			for (var i=0; i<points.length; i++) {
+// 				points[i] = [400-i * 10, 400-i * 10];
+// 			}
+
+// var color = d3.scale.category10();
+
+
+// var svg = d3.select("body").append("svg")
+//     .attr("width", 500)
+//     .attr("height", 500);
+// console.log(voronoi(points));
+
+
+// svg.selectAll("path")
+//     .data(voronoi(points))
+//   .enter().append("path")
+//     .style("fill", function(d, i) { return color(i); })
+//     .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+
+// svg.selectAll("circle")
+//     .data(points)
+//   .enter().append("circle")
+//     .style("fill", function(d, i) { return color(i); })
+//     .attr("transform", function(d) { return "translate(" + d + ")"; })
+//     .attr("r", 4.5);
+
+
+			// var input = geomFact.createMultiPoint(points);    
+			// builder = new jsts.triangulate.VoronoiDiagramBuilder();
+			// builder.setSites(input);
+			// var voronoiResult = builder.getDiagram(geomFact);    
+			// console.log(voronoiResult);
+
+			// var polygons = [];
+			// var count = 0;
+			// voronoiResult.geometries.forEach(function(d){
+			// 	var components = d.shell.points;
+			// 	var polygon = [];
+			// 	polygons.push(polygon);
+			// 	console.log("voronoi============");
+			// 	components.forEach(function(dd){
+			// 		polygon.push({x: dd.x, y: dd.y, c:count});
+			// 		console.log(dd.x + " " + dd.y);
+
+			// 	})
+			// 	count += 10;
+			// })
+
+			// var vis = d3.select("body").append("svg")
+			// .attr("width", 500)
+			// .attr("height", 500);
+			// vis.selectAll("polygon")
+			// .data(polygons)
+			// .enter().append("polygon")
+			// .attr("points",function(d) { 
+			// 	return d.map(function(d) { 
+			// 		return [d.x, d.y].join(","); 
+			// 	}).join(" ");
+			// })
+			// .attr("fill", function(d){
+			// 	var dd = d[0];
+			// 	return "rgb(" + dd.c + "," + dd.c + "," + dd.c + ")";
+			// })
+			// .attr("stroke","#666")
+			// .attr("stroke-width",2);
+
+
+
+// reader = new jsts.io.WKTReader();  
+// var coordinates = [];
+// coordinates.push(new jsts.geom.Coordinate(10, 0));
+// coordinates.push(new jsts.geom.Coordinate(30, 10));
+// coordinates.push(new jsts.geom.Coordinate(30, 30));
+// coordinates.push(new jsts.geom.Coordinate(10, 30));
+// coordinates.push(new jsts.geom.Coordinate(10, 10));
+// coordinates.push(new jsts.geom.Coordinate(10, 0));
+// a = geomFact.createLinearRing(coordinates);
+// a = geomFact.createPolygon(a);
+
+// coordinates = [];
+// coordinates.push(new jsts.geom.Coordinate(50, 50));
+// coordinates.push(new jsts.geom.Coordinate(200, 50));
+// coordinates.push(new jsts.geom.Coordinate(200, 200));
+// coordinates.push(new jsts.geom.Coordinate(50, 200));
+// coordinates.push(new jsts.geom.Coordinate(50, 50));
+// b = geomFact.createLinearRing(coordinates);
+// b = geomFact.createPolygon(b);
+
+// // a = reader.read('POLYGON((10 0, 100 10, 100 100, 10 100, 10 10))');
+// // b = reader.read('POLYGON((50 50, 200 50, 200 200, 50 200, 50 50))');
+
+// union = a.union(b);
+// console.log(union);
+// var parser = new jsts.io.OpenLayersParser();
+
+// //a = parser.write(a);
+// //b = parser.write(b);
+// union = parser.write(union);
+// console.log(union);
+
+// var map = new OpenLayers.Map('map', {
+//   maxExtent: new OpenLayers.Bounds(0, 0, 300, 300),
+//   maxResolution: 100,
+//   units: 'm',
+//   controls: [new OpenLayers.Control.MousePosition(), new OpenLayers.Control.Navigation()]
+// });
+
+// var layer = new OpenLayers.Layer.Vector('test', {isBaseLayer: true});
+// map.addLayer(layer);
+
+// var unionOutput = new OpenLayers.Feature.Vector(union, null, { fillColor: 'green', fillOpacity: 1});
+
+// layer.addFeatures([unionOutput ]);
+// map.zoomToMaxExtent(unionOutput.geometry.getBounds());
+
+// }
+</script>
+
+</body>
+</html>
